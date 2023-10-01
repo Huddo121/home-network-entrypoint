@@ -1,0 +1,32 @@
+[Unit]
+
+Description=NGINX
+
+After=docker.service
+Requires=docker.service
+
+# If the service restarts 5 times in 500 seconds, don't bother trying any more
+StartLimitIntervalSec=500
+StartLimitBurst=5
+
+[Service]
+
+User=nginx
+Group=nginx
+
+Nice=1
+
+SuccessExitStatus=0 1
+
+WorkingDirectory=/home/nginx/proxy
+
+ExecStart=docker compose up
+
+# Restart the service when a failure occurs (kill -9, regular crash)
+Restart=on-failure
+RestartSec=5s
+
+
+[Install]
+
+WantedBy=multi-user.target

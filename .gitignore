@@ -1,0 +1,3 @@
+# Prevent accidental committing of certificates
+/certbot
+!/certbot/**/.git-keep
